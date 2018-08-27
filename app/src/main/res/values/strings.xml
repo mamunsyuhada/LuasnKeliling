@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Luas n Keliling</string>
+
+    <string-array name="opsi">
+        <item>pilih bentuk</item>
+        <item>persegi</item>
+        <item>lingkaran</item>
+        <item>segitiga</item>
+    </string-array>
+
+</resources>
