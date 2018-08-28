@@ -2,6 +2,7 @@ package com.example.praktikan.luasnkeliling;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
@@ -10,43 +11,42 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
-    private Spinner spName;
-    private EditText inPut;
-    private CheckBox luas;
-    private CheckBox keliling;
-    private TextView hasil_luas;
-    private TextView hasil_keliling;
-    private String bentuk;
-    private Double luasHasil;
-    private Double kelilingHasil;
+    Spinner spName;
+    EditText inPut;
+    CheckBox luas;
+    CheckBox keliling;
+    TextView hasil_luas;
+    TextView hasil_keliling;
+    String bentuk;
+    Double luasHasil;
+    Double kelilingHasil;
+    TextView tvBentuk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        spName = (Spinner) findViewById(R.id.spinner);
-        inPut = (EditText) findViewById(R.id.input);
-        luas = (CheckBox) findViewById(R.id.luas);
-        luas.setOnClickListener(this);
-        keliling = (CheckBox) findViewById(R.id.keliling);
-        keliling.setOnClickListener(this);
-        hasil_luas = (TextView)findViewById(R.id.hasil_luas);
-        hasil_keliling = (TextView) findViewById(R.id.hasil_keliling);
+        spName = findViewById(R.id.spinner);
+        inPut = findViewById(R.id.input);
+//        luas = (CheckBox) findViewById(R.id.luasCheck);
+//        keliling = (CheckBox) findViewById(R.id.kelilingCheck);
 
-        pilihSpinner();
+        hasil_luas = findViewById(R.id.hasil_luas);
+        hasil_keliling = findViewById(R.id.hasil_keliling);
 
+        hasil_luas.setVisibility(View.GONE);
+        hasil_keliling.setVisibility(View.GONE);
 
-    }
-
-    private void pilihSpinner() {
         spName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
                 bentuk = spName.getSelectedItem().toString();
+                Log.d("bentuknya : ", bentuk);
+                inPut.setHint("masukkan sisi " +bentuk);
+
                 pilihBentuk();
             }
 
@@ -55,47 +55,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
+
+
     }
 
     private void pilihBentuk() {
-
-        double sisi = Double.parseDouble(String.valueOf(inPut.getText()));
-
-        if (bentuk == "persegi"){
-            luasHasil = sisi * sisi;
-            kelilingHasil = sisi * 4;
+        if (bentuk.equals("persegi")){
+            Log.d("persegi", "yes");
         }
-        if (bentuk == "linkaran"){
-            luasHasil = Math.PI * Math.pow(sisi/2,2);
-            kelilingHasil = Math.PI * sisi;
+        if (bentuk.equals("segitiga")){
+            Log.d("segitiga", "yes");
         }
-        if (bentuk == "segitiga"){
-            double tinggi = Math.pow(sisi,2) * Math.pow(sisi/2,2);
-            luasHasil = 0.5 * sisi * tinggi;
-            kelilingHasil = sisi * 3;
+        if (bentuk.equals("lingkaran")){
+            Log.d("persegi", "yes");
         }
-
-        hasil_luas.setText("Luas " + bentuk + " = " + luasHasil);
-        hasil_keliling.setText("Keliling " + bentuk + " = " + kelilingHasil);
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.luas:
-                if (luas.isChecked()){
-                    Toast.makeText(MainActivity.this, "Luas Checked", Toast.LENGTH_LONG);
+
+    public void checkBox(View view) {
+        Boolean terChecked = ((CheckBox)view).isChecked();
+
+        switch (view.getId()){
+            case R.id.luasCheck:
+                if (terChecked){
+                    hasil_luas.setVisibility(View.VISIBLE);
                 }else {
-                    Toast.makeText(MainActivity.this,"Keliling Checked", Toast.LENGTH_LONG);
+                    hasil_luas.setVisibility(View.GONE);
                 }
                 break;
-            case R.id.keliling:
-                break;
+            case R.id.kelilingCheck:
+                if (terChecked){
+                    hasil_keliling.setVisibility(View.VISIBLE);
+                }else {
+                    hasil_keliling.setVisibility(View.GONE);
+                }
         }
-    }
-
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
     }
 }

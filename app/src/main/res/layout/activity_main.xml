@@ -7,7 +7,7 @@
     tools:context="com.example.praktikan.luasnkeliling.MainActivity">
 
     <LinearLayout
-        android:layout_margin="10dp"
+        android:layout_margin="50dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -22,29 +22,23 @@
             android:layout_height="wrap_content"
             android:id="@+id/spinner"
             android:entries="@array/opsi"/>
-         <TextView
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text="Berikut adalahk"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
-            android:text="Masukan sisi"/>
-        
+
         <EditText
+            android:hint="Masukkan nilai sisi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" 
             android:id="@+id/input"/>
-        
         <CheckBox
+            android:onClick="checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/luas"
+            android:id="@+id/luasCheck"
             android:text="Luas"/>
         <CheckBox
+            android:onClick="checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/keliling"
+            android:id="@+id/kelilingCheck"
             android:text="Keliling"/>
         <TextView
             android:layout_width="wrap_content"
