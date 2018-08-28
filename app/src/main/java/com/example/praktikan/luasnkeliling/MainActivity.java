@@ -15,14 +15,11 @@ public class MainActivity extends AppCompatActivity {
 
     Spinner spName;
     EditText inPut;
-    CheckBox luas;
-    CheckBox keliling;
     TextView hasil_luas;
     TextView hasil_keliling;
     String bentuk;
-    Double luasHasil;
-    Double kelilingHasil;
-    TextView tvBentuk;
+    private String sisi;
+    private CheckBox luas, keliling;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,21 +28,20 @@ public class MainActivity extends AppCompatActivity {
 
         spName = findViewById(R.id.spinner);
         inPut = findViewById(R.id.input);
-//        luas = (CheckBox) findViewById(R.id.luasCheck);
-//        keliling = (CheckBox) findViewById(R.id.kelilingCheck);
+        luas = findViewById(R.id.luasCheck);
+        keliling = findViewById(R.id.kelilingCheck);
 
         hasil_luas = findViewById(R.id.hasil_luas);
         hasil_keliling = findViewById(R.id.hasil_keliling);
 
-        hasil_luas.setVisibility(View.GONE);
         hasil_keliling.setVisibility(View.GONE);
+        hasil_luas.setVisibility(View.GONE);
 
         spName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 bentuk = spName.getSelectedItem().toString();
                 Log.d("bentuknya : ", bentuk);
-                inPut.setHint("masukkan sisi " +bentuk);
 
                 pilihBentuk();
             }
@@ -60,35 +56,54 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void pilihBentuk() {
+        sisi = inPut.getText().toString();
+
         if (bentuk.equals("persegi")){
             Log.d("persegi", "yes");
+            inPut.setHint("masukkan sisi " +bentuk);
+            inPut.setEnabled(true);
+
+            hasil_luas.setText(sisi);
+            hasil_keliling.setText(sisi);
+
         }
         if (bentuk.equals("segitiga")){
             Log.d("segitiga", "yes");
+            inPut.setHint("masukkan sisi " +bentuk);
+            inPut.setEnabled(true);
+
+            hasil_luas.setText(sisi);
+            hasil_keliling.setText(sisi);
         }
         if (bentuk.equals("lingkaran")){
-            Log.d("persegi", "yes");
+            inPut.setHint("masukkan sisi " +bentuk);
+            inPut.setEnabled(true);
+
+            hasil_luas.setText(sisi);
+            hasil_keliling.setText(sisi);
+        }
+        if (bentuk.equals("pilih bentuk")){
+            inPut.setHint("pilih bentuk dulu");
+            inPut.setEnabled(false);
         }
     }
 
-
-    public void checkBox(View view) {
+    public void checkBoxLuas(View view) {
         Boolean terChecked = ((CheckBox)view).isChecked();
-
-        switch (view.getId()){
-            case R.id.luasCheck:
-                if (terChecked){
-                    hasil_luas.setVisibility(View.VISIBLE);
-                }else {
-                    hasil_luas.setVisibility(View.GONE);
-                }
-                break;
-            case R.id.kelilingCheck:
-                if (terChecked){
-                    hasil_keliling.setVisibility(View.VISIBLE);
-                }else {
-                    hasil_keliling.setVisibility(View.GONE);
-                }
+        if (terChecked.equals(true)){
+            hasil_luas.setVisibility(View.VISIBLE);
+        }else {
+            hasil_luas.setVisibility(View.GONE);
         }
+    }
+
+    public void checkBoxKeliling(View view) {
+        Boolean terChecked = ((CheckBox)view).isChecked();
+        if (terChecked.equals(true)){
+            hasil_keliling.setVisibility(View.VISIBLE);
+        }else {
+            hasil_keliling.setVisibility(View.GONE);
+        }
+
     }
 }

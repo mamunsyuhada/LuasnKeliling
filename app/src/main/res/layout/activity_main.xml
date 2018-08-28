@@ -29,13 +29,13 @@
             android:layout_height="wrap_content" 
             android:id="@+id/input"/>
         <CheckBox
-            android:onClick="checkBox"
+            android:onClick="checkBoxLuas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/luasCheck"
             android:text="Luas"/>
         <CheckBox
-            android:onClick="checkBox"
+            android:onClick="checkBoxKeliling"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/kelilingCheck"
